@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/steve-delp/threatmap.svg?branch=master)](https://travis-ci.org/steve-delp/threatmap)
+[![Build Status](https://travis-ci.org/steve-delp/geo-msg.svg?branch=master)](https://travis-ci.org/steve-delp/geo-msg)
 
 Geo Msg
 ===========
