@@ -1,0 +1,71 @@
+buildscript {
+	ext {
+		kotlinVersion = '1.2.41'
+		springBootVersion = '2.0.2.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+		classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+	}
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-spring'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.porterddog'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+compileKotlin {
+	kotlinOptions {
+		freeCompilerArgs = ["-Xjsr305=strict"]
+		jvmTarget = "1.8"
+	}
+}
+compileTestKotlin {
+	kotlinOptions {
+		freeCompilerArgs = ["-Xjsr305=strict"]
+		jvmTarget = "1.8"
+	}
+}
+
+repositories {
+	mavenCentral()
+	// For Exposed library
+	maven { url "https://dl.bintray.com/kotlin/exposed" }
+    // To fetch object mapper for PostGIS
+    maven { url 'https://jitpack.io' }
+    // For geo-json dependency jdbc:2.1.3
+    maven { url 'http://52north.org/maven/repo/releases' }
+}
+
+
+dependencies {
+	compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	compile("org.jetbrains.kotlin:kotlin-reflect")
+    // Spring
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-jdbc'
+    compile 'org.springframework.boot:spring-boot-devtools'
+
+    // Exposed
+    compile 'org.jetbrains.exposed:exposed:0.8.5'
+    // For transaction support
+    compile 'org.jetbrains.exposed:spring-transaction:0.8.5'
+
+    // Object Mapping
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin"
+    compile("org.postgresql:postgresql:9.4.1208")
+    compile("net.postgis:postgis-jdbc:2.2.1")
+    compile("com.github.mayconbordin:postgis-geojson:1.0")
+
+    // Testing
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile "org.springframework.boot:spring-boot-starter-test"
+
+}
