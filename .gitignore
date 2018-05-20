@@ -26,3 +26,5 @@ yarn-error.log*
 *.ipr
 *.iws
 *.idea
+
+.gradle
